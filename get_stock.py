@@ -21,9 +21,9 @@ def get_stock(symbol: str, update=False) -> pd.DataFrame:
         stock = pd.read_csv(f'{DATA_PATH}/{symbol}.csv', index_col="Date")
         stock.index = pd.to_datetime(stock.index)
 
-    # If no csv file is stored, pull data from WTD.com
+    # If no csv file is stored, pull data from worldtradingdata.com
     else:
-        API_KEY = 'pb4ATs4KdzmHetbTW8jXNMTUEseXpJBDvrV6sNEmsA8hEjYqWwHyBuTgCBkB'
+        API_KEY = open('wtd-api-key.txt').read()
 
         r = requests.get(
             f'https://www.worldtradingdata.com/api/v1/history?symbol={symbol}&sort=newest&api_token={API_KEY}')
